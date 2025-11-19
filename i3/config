@@ -9,15 +9,29 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-
-exec feh --bg-scale $HOME/.config/i3/claymore-bg.jpg
 exec randr --output Virtual-1 --mode 1920x1080 --rate 60
+exec feh --bg-scale /home/magigraph/.config/i3/claymore-bg.jpg
+for_window [class="Yad"] floating enable
+
+default_border pixel 1
+default_floating_border pixel
+
+
+client.focused          #FFFC00 #285577 #ffffff #FFFC00   #FFFC00
+client.focused_inactive #B12C00 #5f676a #ffffff #B12C00   #B12C00
+client.unfocused        #640D5F #222222 #888888 #640d5f   #640D5F
+client.urgent           #EB5B00 #900000 #ffffff #eb5b00   #EB5D00
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+gaps inner 4px
+gaps outer 8px
+
 
 set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 8
-exec picom --config /home/magigraph/.config/picom/picom.config
+# exec picom --config /home/magigraph/.config/picom/picom.config
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -54,7 +68,7 @@ for_window [class="(?i)mpv"] floating enable
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec kitty 
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -191,5 +205,5 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        status_command SCRIPT_DIR=/home/magigraph/.config/i3blocks/ i3blocks
 }

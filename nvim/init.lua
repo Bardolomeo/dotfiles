@@ -19,7 +19,7 @@ MiniDeps.add({ name = 'mini.nvim', checkout = 'stable' })
 
 vim.cmd.colorscheme("POWEROFNEO")
 MiniDeps.add("Bardolomeo/powerofneo.vim")
-MiniDeps.add('nvim-treesitter/nvim-treesitter', { branch = 'main'})
+MiniDeps.add('nvim-treesitter/nvim-treesitter', { branch = 'main', lazy=false, build=":TSUpdate"})
 MiniDeps.add("nvim-telescope/telescope.nvim")
 MiniDeps.add("nvim-lua/plenary.nvim")
 MiniDeps.add("kyazdani42/nvim-web-devicons")
@@ -32,18 +32,22 @@ MiniDeps.add('hrsh7th/cmp-buffer')
 MiniDeps.add('hrsh7th/cmp-path')
 MiniDeps.add('hrsh7th/cmp-cmdline')
 MiniDeps.add('hrsh7th/nvim-cmp')
-MiniDeps.add({
-  source = "folke/trouble.nvim",
-  branch = "main", 
+MiniDeps.add('mason-org/mason.nvim')
+MiniDeps.add('redoxahmii/react-extract.nvim')
+MiniDeps.add('prettier/vim-prettier')
+MiniDeps.add('francescarpi/buffon.nvim', {
+	 
 })
 
+require("mason").setup()
 require("nvim-cmp-config")
-require("trouble").setup({})
 
 --- keymap
 vim.o.smartcase = true
 vim.o.ignorecase = true
 vim.o.number = true
+
+vim.o.cursorline = true
 
 --- line number on the left
 vim.o.hlsearch = false
@@ -56,7 +60,7 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 
 --- netrw options
-vim.g.netrw_winsize = 35
+vim.g.netrw_winsize = 15
 
 --- clipboard keybinding (gy == copy, gp == paste)
 vim.keymap.set({'n', 'x'}, 'gy', '"+y')
@@ -66,18 +70,19 @@ vim.g.mapleader = " "
 
 
 --- Trouble (Diagnostic)
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { noremap = true,  desc = "Diagnostics (Trouble)",
-})
-vim.api.nvim_set_keymap("n","<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { noremap = true,  desc = "Buffer Diagnostics (Trouble)",
-})
 vim.api.nvim_set_keymap("n","<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { noremap = true,  desc = "Symbols (Trouble)"})
 vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {noremap = true})
 
 vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+
 --- remap ominfunc/auto completion
 vim.api.nvim_exec("inoremap <C-Space> <C-x><C-o>", true)
+vim.api.nvim_set_keymap("n", '<C-Left>', "<C-w>h", { noremap = true})
+vim.api.nvim_set_keymap("n", '<C-Down>', "<C-w>j", { noremap = true})
+vim.api.nvim_set_keymap("n", '<C-Right>', "<C-w>l", { noremap = true})
+vim.api.nvim_set_keymap("n", '<C-Up>', "<C-w>k", { noremap = true})
 
 -- The following command requires plug-ins "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", and optionally "kyazdani42/nvim-web-devicons" for icon support
 vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { noremap = true, silent = true })
@@ -102,14 +107,20 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, des
 vim.keymap.set("n", "e[", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Go to Next Diagnostic" })
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr, desc = "Open Diagnostic Float" })
 vim.keymap.set("n", "e]", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Go to Previous Diagnostic" })
+vim.keymap.set("n", "<leader>q", ":q<CR>", {noremap = true})
 
 
+--- react-extract
+vim.keymap.set({ "v" }, "<leader>re", require("react-extract").extract_to_new_file, {noremap = true})
+vim.keymap.set({ "v" }, "<leader>rc", require("react-extract").extract_to_current_file, {noremap = true})
 
 
+---line number colors
+vim.api.nvim_set_hl(0, 'LineNr', { fg='#555000' })
 
 --- Lexplore/netrw
-
-vim.api.nvim_set_keymap("n", '<leader><leader>', ':Lexplore<CR>', {noremap = true})
+  
+vim.api.nvim_set_keymap("n", '<leader><leader>', ':let g:netrw_winsize = 15<CR>:Lexplore<CR>', {noremap = true})
 
 
 	vim.api.nvim_exec(

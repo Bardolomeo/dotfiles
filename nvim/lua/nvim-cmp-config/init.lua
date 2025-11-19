@@ -55,20 +55,15 @@ MiniDeps.add('hrsh7th/vim-vsnip')
   -- })
 -- vim.lsp.enable('<YOUR_LSP_SERVER>')
 
+
+
+
+lsps = {'tailwindcss', 'prismals', 'cssls', 'ts_ls', 'emmet_ls', 'clangd'}
+lspsLength = # (lsps)
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  vim.lsp.config('tailwindcss', {
-    capabilities = default_capabilities
-	})
-    vim.lsp.enable('tailwindcss')
-    vim.lsp.config('prismals', {
-    capabilities = capabilities
-  })
-  vim.lsp.enable('prismals')
-	  vim.lsp.config('cssls', {
-    capabilities = capabilities
-  })
-  vim.lsp.enable('cssls')
-	vim.lsp.config('ts_ls', {
-    capabilities = capabilities
-  })
-  vim.lsp.enable('ts_ls')  
+print(lsps)
+for i = 1, lspsLength do
+	vim.lsp.config(lsps[i], {capabilities = default_capabilities})
+	vim.lsp.enable(lsps[i])
+end
