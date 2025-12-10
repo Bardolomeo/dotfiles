@@ -25,7 +25,7 @@ MiniDeps.add("nvim-lua/plenary.nvim")
 MiniDeps.add("kyazdani42/nvim-web-devicons")
 MiniDeps.add("pmizio/typescript-tools.nvim")
 MiniDeps.add("folke/which-key.nvim")
-MiniDeps.add("pocco81/auto-save.nvim")
+--- MiniDeps.add("pocco81/auto-save.nvim")
 MiniDeps.add('neovim/nvim-lspconfig')
 MiniDeps.add('hrsh7th/cmp-nvim-lsp')
 MiniDeps.add('hrsh7th/cmp-buffer')
@@ -35,12 +35,10 @@ MiniDeps.add('hrsh7th/nvim-cmp')
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('redoxahmii/react-extract.nvim')
 MiniDeps.add('prettier/vim-prettier')
-MiniDeps.add('francescarpi/buffon.nvim', {
-	 
-})
 
 require("mason").setup()
 require("nvim-cmp-config")
+require("codecompanion-config")
 
 --- keymap
 vim.o.smartcase = true
@@ -122,6 +120,9 @@ vim.api.nvim_set_hl(0, 'LineNr', { fg='#555000' })
   
 vim.api.nvim_set_keymap("n", '<leader><leader>', ':let g:netrw_winsize = 15<CR>:Lexplore<CR>', {noremap = true})
 
+---other
+vim.api.nvim_set_keymap("i", 'ù', '~', {noremap = true})
+vim.api.nvim_set_keymap("i", '§', '`', {noremap = true})
 
 	vim.api.nvim_exec(
 	[[
