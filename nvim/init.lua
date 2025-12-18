@@ -2,24 +2,22 @@
 local path_package = vim.fn.stdpath('data') .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
-  vim.cmd('echo "Installing `mini.nvim`" | redraw')
-  local clone_cmd = {
-    'git', 'clone', '--filter=blob:none',
-    'https://github.com/nvim-mini/mini.nvim', mini_path
-  }
-  vim.fn.system(clone_cmd)
-  vim.cmd('packadd mini.nvim | helptags ALL')
-  vim.cmd('echo "Installed `mini.nvim`" | redraw')
+	vim.cmd('echo "Installing `mini.nvim`" | redraw')
+	local clone_cmd = {
+		'git', 'clone', '--filter=blob:none',
+		'https://github.com/nvim-mini/mini.nvim', mini_path
+	}
+	vim.fn.system(clone_cmd)
+	vim.cmd('packadd mini.nvim | helptags ALL')
+	vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
 --- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup({ path = { package = path_package } })
 MiniDeps.add({ name = 'mini.nvim', checkout = 'stable' }) 
 
-
-vim.cmd.colorscheme("POWEROFNEO")
 MiniDeps.add("Bardolomeo/powerofneo.vim")
-MiniDeps.add('nvim-treesitter/nvim-treesitter', { branch = 'main', lazy=false, build=":TSUpdate"})
+vim.cmd.colorscheme("POWEROFNEO")
 MiniDeps.add("nvim-telescope/telescope.nvim")
 MiniDeps.add("nvim-lua/plenary.nvim")
 MiniDeps.add("kyazdani42/nvim-web-devicons")
@@ -35,19 +33,30 @@ MiniDeps.add('hrsh7th/nvim-cmp')
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('redoxahmii/react-extract.nvim')
 MiniDeps.add('prettier/vim-prettier')
+MiniDeps.add('kelly-lin/ranger.nvim');
+MiniDeps.add({
+		source = 'nvim-treesitter/nvim-treesitter',
+		lazy = false,
+		checkout = 'main',
+		monitor = 'main',
+  })
+
+
 
 require("mason").setup()
 require("nvim-cmp-config")
 require("codecompanion-config")
+require("autocommands")
 
 --- keymap
 vim.o.smartcase = true
 vim.o.ignorecase = true
+
+--- line number on the left
 vim.o.number = true
 
 vim.o.cursorline = true
 
---- line number on the left
 vim.o.hlsearch = false
 
 --- mantain lines indent on wrap 
@@ -56,9 +65,28 @@ vim.o.breakindent = true
 --- tab size
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
+vim.o.relativenumber = true
 
---- netrw options
-vim.g.netrw_winsize = 15
+--- ranger options
+
+local ranger_nvim = require("ranger-nvim")
+ranger_nvim.setup({
+	replace_netrw = false,
+	keybinds = {
+		["ov"] = ranger_nvim.OPEN_MODE.vsplit,
+		["oh"] = ranger_nvim.OPEN_MODE.split,
+		["ot"] = ranger_nvim.OPEN_MODE.tabedit,
+		["or"] = ranger_nvim.OPEN_MODE.rifle,
+	},
+	ui = {
+		border = "none",
+		height = 0.5,
+		width = 0.5,
+		x = 1,
+		y = 0,
+	}
+})
+
 
 --- clipboard keybinding (gy == copy, gp == paste)
 vim.keymap.set({'n', 'x'}, 'gy', '"+y')
@@ -67,9 +95,7 @@ vim.keymap.set({'n', 'x'}, 'gp', '"+p')
 vim.g.mapleader = " "
 
 
---- Trouble (Diagnostic)
-vim.api.nvim_set_keymap("n","<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { noremap = true,  desc = "Symbols (Trouble)"})
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {noremap = true})
+
 
 vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
@@ -91,6 +117,7 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>ft', builtin.treesitter, { desc = 'Telescope tressitter (functions and varibles)' })
 
 
 -- lsp
@@ -105,8 +132,8 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, des
 vim.keymap.set("n", "e[", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Go to Next Diagnostic" })
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr, desc = "Open Diagnostic Float" })
 vim.keymap.set("n", "e]", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Go to Previous Diagnostic" })
-vim.keymap.set("n", "<leader>q", ":q<CR>", {noremap = true})
-
+vim.keymap.set("n", "<leader>q", ":q!<CR>", {noremap = true})
+vim.keymap.set("n", "<leader>w", ":w<CR>", {noremap = true})
 
 --- react-extract
 vim.keymap.set({ "v" }, "<leader>re", require("react-extract").extract_to_new_file, {noremap = true})
@@ -117,14 +144,19 @@ vim.keymap.set({ "v" }, "<leader>rc", require("react-extract").extract_to_curren
 vim.api.nvim_set_hl(0, 'LineNr', { fg='#555000' })
 
 --- Lexplore/netrw
-  
-vim.api.nvim_set_keymap("n", '<leader><leader>', ':let g:netrw_winsize = 15<CR>:Lexplore<CR>', {noremap = true})
+
+vim.api.nvim_set_keymap("n", "<leader><leader>", "", {
+	noremap = true,
+	callback = function()
+		require("ranger-nvim").open(true)
+	end,
+})
 
 ---other
 vim.api.nvim_set_keymap("i", 'ù', '~', {noremap = true})
 vim.api.nvim_set_keymap("i", '§', '`', {noremap = true})
 
-	vim.api.nvim_exec(
+vim.api.nvim_exec(
 	[[
 	" Better code indentation
 	filetype plugin indent on
@@ -142,31 +174,31 @@ vim.api.nvim_set_keymap("i", '§', '`', {noremap = true})
 	let g:netrw_winsize = 25
 
 	function! ToggleNetrw()
-			if g:NetrwIsOpen
-					let i = bufnr("$")
-					while (i >= 1)
-							if (getbufvar(i, "&filetype") == "netrw")
-									silent exe "bwipeout " . i 
-							endif
-							let i-=1
-					endwhile
-					let g:NetrwIsOpen=0
+	if g:NetrwIsOpen
+		let i = bufnr("$")
+		while (i >= 1)
+			if (getbufvar(i, "&filetype") == "netrw")
+				silent exe "bwipeout " . i 
+				endif
+				let i-=1
+				endwhile
+				let g:NetrwIsOpen=0
 			else
-					let g:NetrwIsOpen=1
-					silent Lexplore!
-			endif
-	endfunction
-	]],
-	true
-	)
+				let g:NetrwIsOpen=1
+				silent Lexplore!
+				endif
+				endfunction
+				]],
+				true
+			)
 
-	require("typescript-tools").setup {
-  settings = {
-       tsserver_plugins = {
-      -- for TypeScript v4.9+
-      "@styled/typescript-styled-plugin",
-      -- or for older TypeScript versions
-      -- "typescript-styled-plugin",
-    },
-  },
-}
+			require("typescript-tools").setup {
+				settings = {
+					tsserver_plugins = {
+						-- for TypeScript v4.9+
+						"@styled/typescript-styled-plugin",
+						-- or for older TypeScript versions
+						-- "typescript-styled-plugin",
+					},
+				},
+			}

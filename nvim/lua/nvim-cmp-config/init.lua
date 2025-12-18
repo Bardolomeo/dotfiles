@@ -48,15 +48,6 @@ MiniDeps.add('hrsh7th/vim-vsnip')
   })
 
   -- -- Set up lspconfig.
-  -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  -- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  -- vim.lsp.config('ts_ls', {
-  --   capabilities = capabilities
-  -- })
--- vim.lsp.enable('<YOUR_LSP_SERVER>')
-
-
-
 
 lsps = {'tailwindcss', 'cssls', 'pylsp', 'ts_ls', 'clangd'}
 lspsLength = # (lsps)
