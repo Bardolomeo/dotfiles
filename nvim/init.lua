@@ -45,8 +45,6 @@ MiniDeps.add({
 
 require("mason").setup()
 require("nvim-cmp-config")
-require("codecompanion-config")
-require("autocommands")
 
 --- keymap
 vim.o.smartcase = true
