@@ -22,6 +22,7 @@ MiniDeps.add("nvim-telescope/telescope.nvim")
 MiniDeps.add("nvim-lua/plenary.nvim")
 MiniDeps.add("kyazdani42/nvim-web-devicons")
 MiniDeps.add("pmizio/typescript-tools.nvim")
+MiniDeps.add("OXY2DEV/markview.nvim")
 MiniDeps.add("folke/which-key.nvim")
 --- MiniDeps.add("pocco81/auto-save.nvim")
 MiniDeps.add('neovim/nvim-lspconfig')
@@ -30,10 +31,24 @@ MiniDeps.add('hrsh7th/cmp-buffer')
 MiniDeps.add('hrsh7th/cmp-path')
 MiniDeps.add('hrsh7th/cmp-cmdline')
 MiniDeps.add('hrsh7th/nvim-cmp')
-MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('redoxahmii/react-extract.nvim')
 MiniDeps.add('prettier/vim-prettier')
 MiniDeps.add('kelly-lin/ranger.nvim');
+
+
+MiniDeps.add('mason-org/mason.nvim')
+MiniDeps.add('mason-org/mason-lspconfig.nvim');
+MiniDeps.add("pmizio/typescript-tools.nvim")
+require("mason").setup()
+require('mason-lspconfig').setup {
+	ensure_installed = {
+		"lua_ls",
+		"vtsls",
+	}
+}
+require('typescript-tools').setup()
+
+
 MiniDeps.add({
 		source = 'nvim-treesitter/nvim-treesitter',
 		lazy = false,
