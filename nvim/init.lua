@@ -38,12 +38,16 @@ MiniDeps.add('kelly-lin/ranger.nvim');
 
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
-MiniDeps.add("pmizio/typescript-tools.nvim")
 require("mason").setup()
 require('mason-lspconfig').setup {
 	ensure_installed = {
 		"lua_ls",
 		"vtsls",
+	},
+	automatic_enable = {
+		exclude = {
+			"vtsls"
+		}
 	}
 }
 require('typescript-tools').setup()
@@ -80,6 +84,10 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.relativenumber = true
 
+--- FOLDING
+vim.opt.foldmethod = "syntax"
+vim.opt.foldlevel = 20
+vim.cmd("highlight Folded guibg=darkyellow guifg=magenta")
 --- ranger options
 
 local ranger_nvim = require("ranger-nvim")
