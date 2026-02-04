@@ -24,7 +24,6 @@ MiniDeps.add("kyazdani42/nvim-web-devicons")
 MiniDeps.add("pmizio/typescript-tools.nvim")
 MiniDeps.add("OXY2DEV/markview.nvim")
 MiniDeps.add("folke/which-key.nvim")
---- MiniDeps.add("pocco81/auto-save.nvim")
 MiniDeps.add('neovim/nvim-lspconfig')
 MiniDeps.add('hrsh7th/cmp-nvim-lsp')
 MiniDeps.add('hrsh7th/cmp-buffer')
@@ -33,9 +32,9 @@ MiniDeps.add('hrsh7th/cmp-cmdline')
 MiniDeps.add('hrsh7th/nvim-cmp')
 MiniDeps.add('redoxahmii/react-extract.nvim')
 MiniDeps.add('prettier/vim-prettier')
+
+
 MiniDeps.add('kelly-lin/ranger.nvim');
-
-
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
 require("mason").setup()
@@ -83,6 +82,10 @@ vim.o.breakindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.relativenumber = true
+
+--- opencode
+require('opencode-conf');
+
 
 --- FOLDING
 vim.opt.foldmethod = "syntax"
