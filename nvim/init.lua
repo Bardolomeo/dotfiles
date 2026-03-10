@@ -18,10 +18,10 @@ MiniDeps.add({ name = 'mini.nvim', checkout = 'stable' })
 
 MiniDeps.add("Bardolomeo/powerofneo.vim")
 vim.cmd.colorscheme("POWEROFNEO")
+MiniDeps.add("sigmasd/deno-nvim")
 MiniDeps.add("nvim-telescope/telescope.nvim")
 MiniDeps.add("nvim-lua/plenary.nvim")
 MiniDeps.add("kyazdani42/nvim-web-devicons")
-MiniDeps.add("pmizio/typescript-tools.nvim")
 MiniDeps.add("OXY2DEV/markview.nvim")
 MiniDeps.add("folke/which-key.nvim")
 MiniDeps.add('neovim/nvim-lspconfig')
@@ -30,10 +30,14 @@ MiniDeps.add('hrsh7th/cmp-buffer')
 MiniDeps.add('hrsh7th/cmp-path')
 MiniDeps.add('hrsh7th/cmp-cmdline')
 MiniDeps.add('hrsh7th/nvim-cmp')
+MiniDeps.add({
+	source = 'chipsenkbeil/distant.nvim',
+	branch = 'v0.3',
+})
+
+require('distant'):setup()
 MiniDeps.add('redoxahmii/react-extract.nvim')
 MiniDeps.add('prettier/vim-prettier')
-
-
 MiniDeps.add('kelly-lin/ranger.nvim');
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
@@ -41,16 +45,15 @@ require("mason").setup()
 require('mason-lspconfig').setup {
 	ensure_installed = {
 		"lua_ls",
-		"vtsls",
 	},
-	automatic_enable = {
-		exclude = {
-			"vtsls"
-		}
-	}
 }
-require('typescript-tools').setup()
 
+MiniDeps.add("pmizio/typescript-tools.nvim")
+require('typescript-tools').setup({
+	setting = {
+		tsserver_path = vim.fn.expand("$HOME/.config/nvim/deno_ts_ls/bin/typescript-lsp")
+	}
+})
 
 MiniDeps.add({
 		source = 'nvim-treesitter/nvim-treesitter',
@@ -105,8 +108,8 @@ ranger_nvim.setup({
 	ui = {
 		border = "none",
 		height = 0.5,
-		width = 0.5,
-		x = 1,
+		width = 1,
+		x = 0,
 		y = 0,
 	}
 })
@@ -216,13 +219,3 @@ vim.api.nvim_exec(
 				true
 			)
 
-			require("typescript-tools").setup {
-				settings = {
-					tsserver_plugins = {
-						-- for TypeScript v4.9+
-						"@styled/typescript-styled-plugin",
-						-- or for older TypeScript versions
-						-- "typescript-styled-plugin",
-					},
-				},
-			}

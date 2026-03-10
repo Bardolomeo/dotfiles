@@ -5,24 +5,7 @@ MiniDeps.add({
 })
 
 vim.g.opencode_opts = {
-	provider = {
-		enabled = "snacks",
-		snacks = {
-			auto_close = true, -- Close the terminal when `opencode` exits
-      win = {
-        position = "right",
-        enter = false, -- Stay in the editor after opening the terminal
-        wo = {
-          winbar = "", -- Title is unnecessary - `opencode` TUI has its own footer
-        },
-        bo = {
-          -- Make it easier to target for customization, and prevent possibly unintended `"snacks_terminal"` targeting.
-          -- e.g. the recommended edgy.nvim integration puts all `"snacks_terminal"` windows at the bottom.
-          filetype = "opencode_terminal",
-        },
-      },
-		}
-	}
+	port = 5000
 }
 
 vim.o.autoread = true
