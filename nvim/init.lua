@@ -102,7 +102,7 @@ ranger_nvim.setup({
 	keybinds = {
 		["ov"] = ranger_nvim.OPEN_MODE.vsplit,
 		["oh"] = ranger_nvim.OPEN_MODE.split,
-		["ot"] = ranger_nvim.OPEN_MODE.tabedit,
+		["<CR>"] = ranger_nvim.OPEN_MODE.tabedit,
 		["or"] = ranger_nvim.OPEN_MODE.rifle,
 	},
 	ui = {
@@ -182,6 +182,8 @@ vim.api.nvim_set_keymap("n", "<leader><leader>", "", {
 ---other
 vim.api.nvim_set_keymap("i", 'ù', '~', {noremap = true})
 vim.api.nvim_set_keymap("i", '§', '`', {noremap = true})
+vim.api.nvim_set_keymap("n", '<TAB>', 'gt', {noremap = true})
+vim.api.nvim_set_keymap("n", '<S-TAB>', 'gT', {noremap = true})
 
 vim.api.nvim_exec(
 	[[
