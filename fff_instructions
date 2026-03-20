@@ -1,0 +1,9 @@
+yay fff
+xdg-mime default nvim.desktop application/javascript
+
+
+--- foot.ini ---
+...
+environment
+	EDITOR=nvim
+...

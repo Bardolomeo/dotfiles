@@ -49,7 +49,7 @@ MiniDeps.add('hrsh7th/vim-vsnip')
 
   -- -- Set up lspconfig.
 
-local lsps = {'tailwindcss', 'cssls', 'pylsp', 'clangd'}
+local lsps = {'tailwindcss', 'cssls', 'pylsp', 'clangd', 'denols'}
 local lspsLength = # (lsps)
 
 local default_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -58,9 +58,3 @@ for i = 1, lspsLength do
 	vim.lsp.enable(lsps[i])
 end
 
-vim.lsp.config('ts_ls',  {
-	capabilities = default_capabilities,
-	on_attach = on_attach,
-	cmd = {vim.fn.expand("$HOME/.config/nvim/deno_ts_ls/start.sh")},
-	filetypes = {'typescript', 'javascript', 'typescriptreact', 'typescript.tsx'}
-})

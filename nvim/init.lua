@@ -17,7 +17,12 @@ require('mini.deps').setup({ path = { package = path_package } })
 MiniDeps.add({ name = 'mini.nvim', checkout = 'stable' }) 
 
 MiniDeps.add("Bardolomeo/powerofneo.vim")
-vim.cmd.colorscheme("POWEROFNEO")
+MiniDeps.add("iibe/gruvbox-high-contrast")
+
+vim.g.gruvbox_contrast_dark = 'hard'
+vim.cmd.colorscheme('gruvbox-high-contrast')
+vim.background = 'dark'
+
 MiniDeps.add("sigmasd/deno-nvim")
 MiniDeps.add("nvim-telescope/telescope.nvim")
 MiniDeps.add("nvim-lua/plenary.nvim")
@@ -47,13 +52,6 @@ require('mason-lspconfig').setup {
 		"lua_ls",
 	},
 }
-
-MiniDeps.add("pmizio/typescript-tools.nvim")
-require('typescript-tools').setup({
-	setting = {
-		tsserver_path = vim.fn.expand("$HOME/.config/nvim/deno_ts_ls/bin/typescript-lsp")
-	}
-})
 
 MiniDeps.add({
 		source = 'nvim-treesitter/nvim-treesitter',
