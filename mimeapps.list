@@ -1,0 +1,4 @@
+
+[Default Applications]
+application/typescript=nvim.desktop
+application/javascript=nvim.desktop

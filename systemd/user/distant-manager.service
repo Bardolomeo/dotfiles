@@ -1,0 +1,7 @@
+[Unit]
+Description=distant-manager
+[Service]
+ExecStart=/home/magigraph/.local/share/nvim/distant.nvim/bin/distant manager listen --user
+Restart=on-failure
+[Install]
+WantedBy=default.target

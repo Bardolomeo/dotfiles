@@ -1,0 +1,7 @@
+dms-shell-bin
+fff
+google-breakpad
+maplemono-ttf
+ngrok
+pacgraph
+quickshell-git
