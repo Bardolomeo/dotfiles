@@ -27,7 +27,6 @@ MiniDeps.add("sigmasd/deno-nvim")
 MiniDeps.add("nvim-telescope/telescope.nvim")
 MiniDeps.add("nvim-lua/plenary.nvim")
 MiniDeps.add("kyazdani42/nvim-web-devicons")
-MiniDeps.add("OXY2DEV/markview.nvim")
 MiniDeps.add("folke/which-key.nvim")
 MiniDeps.add('neovim/nvim-lspconfig')
 MiniDeps.add('hrsh7th/cmp-nvim-lsp')
@@ -35,17 +34,16 @@ MiniDeps.add('hrsh7th/cmp-buffer')
 MiniDeps.add('hrsh7th/cmp-path')
 MiniDeps.add('hrsh7th/cmp-cmdline')
 MiniDeps.add('hrsh7th/nvim-cmp')
-MiniDeps.add({
-	source = 'chipsenkbeil/distant.nvim',
-	branch = 'v0.3',
-})
-
-require('distant'):setup()
-MiniDeps.add('redoxahmii/react-extract.nvim')
 MiniDeps.add('prettier/vim-prettier')
 MiniDeps.add('kelly-lin/ranger.nvim');
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
+MiniDeps.add('vihu/penview.nvim');
+require("penview.build").install();
+require("penview").setup({
+	browser = "firefox",
+})
+
 require("mason").setup()
 require('mason-lspconfig').setup {
 	ensure_installed = {
@@ -64,6 +62,10 @@ MiniDeps.add({
 
 require("mason").setup()
 require("nvim-cmp-config")
+MiniDeps.add("YousefHadder/markdown-plus.nvim")
+require('markdown-plus').setup({
+	filetypes = { "markdown", "text", "txt", "md" }
+})
 
 --- keymap
 vim.o.smartcase = true
@@ -83,9 +85,6 @@ vim.o.breakindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.relativenumber = true
-
---- opencode
-require('opencode-conf');
 
 
 --- FOLDING
@@ -120,8 +119,12 @@ vim.keymap.set({'n', 'x'}, 'gp', '"+p')
 vim.g.mapleader = " "
 
 
+--- penview
 
+vim.api.nvim_set_keymap('n', '<leader>po', '<cmd>PenviewStart<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pc', '<cmd>PenviewStop<CR>', { noremap = true, silent = true })
 
+-- diagnostic
 vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
@@ -154,16 +157,8 @@ vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, { buffer = bufnr, desc = "Symbol References" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
-vim.keymap.set("n", "e[", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Go to Next Diagnostic" })
-vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr, desc = "Open Diagnostic Float" })
-vim.keymap.set("n", "e]", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Go to Previous Diagnostic" })
 vim.keymap.set("n", "<leader>q", ":q!<CR>", {noremap = true})
 vim.keymap.set("n", "<leader>w", ":w<CR>", {noremap = true})
-
---- react-extract
-vim.keymap.set({ "v" }, "<leader>re", require("react-extract").extract_to_new_file, {noremap = true})
-vim.keymap.set({ "v" }, "<leader>rc", require("react-extract").extract_to_current_file, {noremap = true})
-
 
 ---line number colors
 vim.api.nvim_set_hl(0, 'LineNr', { fg='#555000' })
@@ -185,8 +180,6 @@ vim.api.nvim_set_keymap("n", '<S-TAB>', 'gT', {noremap = true})
 
 vim.api.nvim_exec(
 	[[
-	" Better code indentation
-	filetype plugin indent on
 
 	" Explorer is closed by default
 	let g:NetrwIsOpen=0

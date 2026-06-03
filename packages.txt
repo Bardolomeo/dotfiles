@@ -35,7 +35,6 @@ efibootmgr
 efitools
 endeavouros-keyring
 endeavouros-mirrorlist
-eos-dracut
 eos-hooks
 ethtool
 ex-vi-compat
