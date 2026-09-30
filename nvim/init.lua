@@ -38,11 +38,9 @@ MiniDeps.add('prettier/vim-prettier')
 MiniDeps.add('kelly-lin/ranger.nvim');
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
-MiniDeps.add('vihu/penview.nvim');
-require("penview.build").install();
-require("penview").setup({
-	browser = "firefox",
-})
+MiniDeps.add('lukas-reineke/indent-blankline.nvim');
+
+require('ibl').setup();
 
 require("mason").setup()
 require('mason-lspconfig').setup {
@@ -146,6 +144,7 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live gr
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>ft', builtin.treesitter, { desc = 'Telescope tressitter (functions and varibles)' })
+vim.api.nvim_set_keymap("n", '<M-Q>', "<C-^Q>", { noremap = true})
 
 
 -- lsp
