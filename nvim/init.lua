@@ -20,8 +20,7 @@ MiniDeps.add("Bardolomeo/powerofneo.vim")
 MiniDeps.add("iibe/gruvbox-high-contrast")
 
 vim.g.gruvbox_contrast_dark = 'hard'
-vim.cmd.colorscheme('gruvbox-high-contrast')
-vim.background = 'dark'
+vim.background = 'light'
 
 MiniDeps.add("sigmasd/deno-nvim")
 MiniDeps.add("nvim-telescope/telescope.nvim")
@@ -39,6 +38,7 @@ MiniDeps.add('kelly-lin/ranger.nvim');
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
 MiniDeps.add('lukas-reineke/indent-blankline.nvim');
+MiniDeps.add("MeanderingProgrammer/render-markdown.nvim")
 
 require('ibl').setup();
 
@@ -48,6 +48,8 @@ require('mason-lspconfig').setup {
 		"lua_ls",
 	},
 }
+
+--- vim.cmd("set runtimepath='/home/magigraph/repos/dotfiles/nvim','/home/magigraph/.config/nvim','/home/magiraph/.config/nvim/lua'")
 
 MiniDeps.add({
 		source = 'nvim-treesitter/nvim-treesitter',
@@ -60,10 +62,6 @@ MiniDeps.add({
 
 require("mason").setup()
 require("nvim-cmp-config")
-MiniDeps.add("YousefHadder/markdown-plus.nvim")
-require('markdown-plus').setup({
-	filetypes = { "markdown", "text", "txt", "md" }
-})
 
 --- keymap
 vim.o.smartcase = true
