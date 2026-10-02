@@ -21,6 +21,7 @@ MiniDeps.add("iibe/gruvbox-high-contrast")
 
 vim.g.gruvbox_contrast_dark = 'hard'
 vim.background = 'light'
+vim.cmd('colorscheme gruvbox-high-contrast')
 
 MiniDeps.add("sigmasd/deno-nvim")
 MiniDeps.add("nvim-telescope/telescope.nvim")
@@ -38,7 +39,7 @@ MiniDeps.add('kelly-lin/ranger.nvim');
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
 MiniDeps.add('lukas-reineke/indent-blankline.nvim');
-MiniDeps.add("MeanderingProgrammer/render-markdown.nvim")
+MiniDeps.add("OXY2DEV/markview.nvim")
 
 require('ibl').setup();
 
