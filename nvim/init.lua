@@ -155,7 +155,7 @@ vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename Symbol" })
 vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, { buffer = bufnr, desc = "Symbol References" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
-vim.keymap.set("n", "<leader>q", ":q!<CR>", {noremap = true})
+vim.keymap.set("n", "<leader>q", ":wq!<CR>", {noremap = true})
 vim.keymap.set("n", "<leader>w", ":w<CR>", {noremap = true})
 
 ---line number colors
