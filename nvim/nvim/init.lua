@@ -1,0 +1,211 @@
+
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+	vim.cmd('echo "Installing `mini.nvim`" | redraw')
+	local clone_cmd = {
+		'git', 'clone', '--filter=blob:none',
+		'https://github.com/nvim-mini/mini.nvim', mini_path
+	}
+	vim.fn.system(clone_cmd)
+	vim.cmd('packadd mini.nvim | helptags ALL')
+	vim.cmd('echo "Installed `mini.nvim`" | redraw')
+end
+
+--- Set up 'mini.deps' (customize to your liking)
+require('mini.deps').setup({ path = { package = path_package } })
+MiniDeps.add({ name = 'mini.nvim', checkout = 'stable' }) 
+
+MiniDeps.add("Bardolomeo/powerofneo.vim")
+MiniDeps.add("iibe/gruvbox-high-contrast")
+
+vim.g.gruvbox_contrast_dark = 'hard'
+vim.background = 'light'
+
+MiniDeps.add("sigmasd/deno-nvim")
+MiniDeps.add("nvim-telescope/telescope.nvim")
+MiniDeps.add("nvim-lua/plenary.nvim")
+MiniDeps.add("kyazdani42/nvim-web-devicons")
+MiniDeps.add("folke/which-key.nvim")
+MiniDeps.add('neovim/nvim-lspconfig')
+MiniDeps.add('hrsh7th/cmp-nvim-lsp')
+MiniDeps.add('hrsh7th/cmp-buffer')
+MiniDeps.add('hrsh7th/cmp-path')
+MiniDeps.add('hrsh7th/cmp-cmdline')
+MiniDeps.add('hrsh7th/nvim-cmp')
+MiniDeps.add('prettier/vim-prettier')
+MiniDeps.add('kelly-lin/ranger.nvim');
+MiniDeps.add('mason-org/mason.nvim')
+MiniDeps.add('mason-org/mason-lspconfig.nvim');
+MiniDeps.add('lukas-reineke/indent-blankline.nvim');
+MiniDeps.add("MeanderingProgrammer/render-markdown.nvim")
+
+require('ibl').setup();
+
+require("mason").setup()
+require('mason-lspconfig').setup {
+	ensure_installed = {
+		"lua_ls",
+	},
+}
+
+--- vim.cmd("set runtimepath='/home/magigraph/repos/dotfiles/nvim','/home/magigraph/.config/nvim','/home/magiraph/.config/nvim/lua'")
+
+MiniDeps.add({
+		source = 'nvim-treesitter/nvim-treesitter',
+		lazy = false,
+		checkout = 'main',
+		monitor = 'main',
+  })
+
+
+
+require("mason").setup()
+require("nvim-cmp-config")
+
+--- keymap
+vim.o.smartcase = true
+vim.o.ignorecase = true
+
+--- line number on the left
+vim.o.number = true
+
+vim.o.cursorline = true
+
+vim.o.hlsearch = false
+
+--- mantain lines indent on wrap 
+vim.o.breakindent = true
+
+--- tab size
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.relativenumber = true
+
+
+--- FOLDING
+vim.opt.foldmethod = "syntax"
+vim.opt.foldlevel = 20
+vim.cmd("highlight Folded guibg=darkyellow guifg=magenta")
+--- ranger options
+
+local ranger_nvim = require("ranger-nvim")
+ranger_nvim.setup({
+	replace_netrw = false,
+	keybinds = {
+		["ov"] = ranger_nvim.OPEN_MODE.vsplit,
+		["oh"] = ranger_nvim.OPEN_MODE.split,
+		["<CR>"] = ranger_nvim.OPEN_MODE.tabedit,
+		["or"] = ranger_nvim.OPEN_MODE.rifle,
+	},
+	ui = {
+		border = "none",
+		height = 0.5,
+		width = 1,
+		x = 0,
+		y = 0,
+	}
+})
+
+
+--- clipboard keybinding (gy == copy, gp == paste)
+vim.keymap.set({'n', 'x'}, 'gy', '"+y')
+vim.keymap.set({'n', 'x'}, 'gp', '"+p')
+
+vim.g.mapleader = " "
+
+
+--- penview
+
+vim.api.nvim_set_keymap('n', '<leader>po', '<cmd>PenviewStart<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pc', '<cmd>PenviewStop<CR>', { noremap = true, silent = true })
+
+-- diagnostic
+vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+
+--- remap ominfunc/auto completion
+vim.api.nvim_exec("inoremap <C-Space> <C-x><C-o>", true)
+vim.api.nvim_set_keymap("n", '<C-Left>', "<C-w>h", { noremap = true})
+vim.api.nvim_set_keymap("n", '<C-Down>', "<C-w>j", { noremap = true})
+vim.api.nvim_set_keymap("n", '<C-Right>', "<C-w>l", { noremap = true})
+vim.api.nvim_set_keymap("n", '<C-Up>', "<C-w>k", { noremap = true})
+
+-- The following command requires plug-ins "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", and optionally "kyazdani42/nvim-web-devicons" for icon support
+vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { noremap = true, silent = true })
+
+--- telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>ft', builtin.treesitter, { desc = 'Telescope tressitter (functions and varibles)' })
+vim.api.nvim_set_keymap("n", '<M-Q>', "<C-^Q>", { noremap = true})
+
+
+-- lsp
+vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to Declaration" })
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to Definition" })
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP Hover" })
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to Implementation" })
+vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Help" })
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename Symbol" })
+vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, { buffer = bufnr, desc = "Symbol References" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
+vim.keymap.set("n", "<leader>q", ":q!<CR>", {noremap = true})
+vim.keymap.set("n", "<leader>w", ":w<CR>", {noremap = true})
+
+---line number colors
+vim.api.nvim_set_hl(0, 'LineNr', { fg='#555000' })
+
+--- Lexplore/netrw
+
+vim.api.nvim_set_keymap("n", "<leader><leader>", "", {
+	noremap = true,
+	callback = function()
+		require("ranger-nvim").open(true)
+	end,
+})
+
+---other
+vim.api.nvim_set_keymap("i", 'ù', '~', {noremap = true})
+vim.api.nvim_set_keymap("i", '§', '`', {noremap = true})
+vim.api.nvim_set_keymap("n", '<TAB>', 'gt', {noremap = true})
+vim.api.nvim_set_keymap("n", '<S-TAB>', 'gT', {noremap = true})
+
+vim.api.nvim_exec(
+	[[
+
+	" Explorer is closed by default
+	let g:NetrwIsOpen=0
+
+	" Disable top information
+	let g:netrw_banner = 0
+
+	" Use nested tree style explorer
+	let g:netrw_liststyle = 3
+
+	" Explorer takes up 25% of screen
+	let g:netrw_winsize = 25
+
+	function! ToggleNetrw()
+	if g:NetrwIsOpen
+		let i = bufnr("$")
+		while (i >= 1)
+			if (getbufvar(i, "&filetype") == "netrw")
+				silent exe "bwipeout " . i 
+				endif
+				let i-=1
+				endwhile
+				let g:NetrwIsOpen=0
+			else
+				let g:NetrwIsOpen=1
+				silent Lexplore!
+				endif
+				endfunction
+				]],
+				true
+			)
+
