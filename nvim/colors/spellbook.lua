@@ -8,6 +8,7 @@ local hl = vim.api.nvim_set_hl
 -- Editor interface
 ---
 
+vim.cmd("set cmdheight=0");
 hl(0, 'Normal',  {fg = '#0d20b6', bg = '#E0c9a6', ctermfg = 145, ctermbg = 235})
 hl(0, 'Cursor', {bg = '#fcfcfc', fg='#0b0b0b'})
 hl(0, 'CursorLine', {bg = 'NONE', ctermbg = 236})
@@ -26,7 +27,7 @@ hl(0, 'ColorColumn', {bg = '#1C6A35', ctermbg = 236})
 hl(0, 'SignColumn', {})
 hl(0, 'FoldColumn', {})
 hl(0, 'Folded', {fg = '#de5285', ctermfg = 59})
-hl(0, 'Pmenu', {fg = '#0d20b6', bg = '#97572B', ctermfg = 145, ctermbg = 237})
+hl(0, 'Pmenu', {fg = '#0b0b0b', bg = '#d0b897', ctermfg = 145, ctermbg = 237})
 hl(0, 'PmenuSbar', {bg = '#0b0b0b', ctermbg = 236})
 hl(0, 'PmenuSel', {fg = '#97572B', bg = '#e5c07b', ctermfg = 236, ctermbg = 39, blend = 0})
 hl(0, 'PmenuThumb', {bg = '#AC3235', ctermbg = 145})

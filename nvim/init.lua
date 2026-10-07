@@ -21,7 +21,7 @@ MiniDeps.add("iibe/gruvbox-high-contrast")
 
 vim.g.gruvbox_contrast_dark = 'hard'
 vim.background = 'light'
-vim.cmd('colorscheme gruvbox-high-contrast')
+vim.cmd('colorscheme spellbook')
 
 MiniDeps.add("sigmasd/deno-nvim")
 MiniDeps.add("nvim-telescope/telescope.nvim")
