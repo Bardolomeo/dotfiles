@@ -109,7 +109,7 @@ hl(0, 'MarkviewPalette3', {fg = '#0d20b6', bg = '#a3a6c8'})
 hl(0, 'MarkviewPalette4', {fg = '#de5285', bg = '#c8a3b1'})
 hl(0, '@markup.strong', {fg = '#0b0b0b'})
 hl(0, '@markup.link', {fg = '#558dc8', underline= true})
-hl(0, '@markup.italic', {fg = '#0d20b6', italic=false, underline=true})
+hl(0, '@markup.italic', {fg = '#0d20b6',  underdouble=true})
 
 -- Syntax: Netrw
 hl(0, 'netrwDir', {link = 'Function'})
