@@ -40,15 +40,26 @@ MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
 MiniDeps.add('lukas-reineke/indent-blankline.nvim');
 MiniDeps.add("OXY2DEV/markview.nvim")
+require('markview').setup({
+	markdown = {
+		enabled = true,
+		tables = {
+			enable = true,
+			strict = true,
+			block_decorator = true,
+			use_virt_lines = true
+		}
+	}
+})
 
 require('ibl').setup();
 
 require("mason").setup()
-require('mason-lspconfig').setup {
+require('mason-lspconfig').setup({
 	ensure_installed = {
 		"lua_ls",
 	},
-}
+})
 
 --- vim.cmd("set runtimepath='/home/magigraph/repos/dotfiles/nvim','/home/magigraph/.config/nvim','/home/magiraph/.config/nvim/lua'")
 
@@ -76,7 +87,7 @@ vim.o.cursorline = true
 vim.o.hlsearch = false
 
 --- mantain lines indent on wrap 
-vim.o.breakindent = true
+vim.cmd('set nowrap')
 
 --- tab size
 vim.o.tabstop = 2
