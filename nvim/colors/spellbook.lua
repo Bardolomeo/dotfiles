@@ -10,7 +10,7 @@ local hl = vim.api.nvim_set_hl
 
 --vim.cmd("set cmdheight=0");
 hl(0, 'Normal',  {fg = '#0d20b6', bg = '#E0c9a6', ctermfg = 145, ctermbg = 235})
-hl(0, 'Cursor', {bg = '#fcfcfc', fg='#0b0b0b'})
+hl(0, 'Cursor', {bg = '#0b0b0b', fg='#ffffff'})
 hl(0, 'CursorLine', {bg = 'NONE', ctermbg = 236})
 hl(0, 'CursorLineNr', {bg='#AC3235', fg='#d4af37'})
 hl(0, 'Visual', {fg='#000000', bg='#AC3235', ctermbg = 000})

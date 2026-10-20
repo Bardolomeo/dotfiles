@@ -1,7 +1,7 @@
-font_family      family="Fantasque Sans Mono" style=Italic
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
+# font_family      family="VictorMono Nerd Font Mono" style='Bold Italic'
+# bold_font        auto
+# italic_font      auto
+# bold_italic_font auto
 
 font_size 14.0
 cursor_trail 1
@@ -11,14 +11,12 @@ visual_bell_color #0b0b0b
 
 
 background_opacity 0.8
-# alpha-mode=default # Can be `default`, `matching` or `all`
+alpha-mode=default # Can be `default`, `matching` or `all`
 background #011b26
 foreground #18b3f0 
-#
 
-selection_foreground=47bfea # Brightest-base-hue
-selection_background=01475f # NvimDarkGrey4
-
+selection_foreground #47bfea # Brightest-base-hue
+selection_background #01475f # NvimDarkGrey4
 color0 #07769e # NvimDarkGrey1
 color1 #ea47b3 # NvimLightRed
 color2 #47eab2 # NvimLightGreen
@@ -27,7 +25,6 @@ color4 #b4d8e5 # NvimLightBlue
 color5 #bf47ea # NvimLightMagenta
 color6 #8ad5e9 # NvimLightCyan
 color7 #d3e4ea # NvimLightGrey3
-
 color8 #d3e4ea # NvimDarkGrey3
 color9 #ea477c # NvimLightRed
 color10 #47eab2 # NvimLightGreen
@@ -36,3 +33,17 @@ color12 #b4d8e5 # NvimLightBlue
 color13 #bf47ea # NvimLightMagenta
 color14 #8ad5e9 # NvimLightCyan
 color15 #07769e # NvimLightGrey1
+
+
+# BEGIN_KITTY_THEME
+# Base4Tone_Classic_I Dark
+include current-theme.conf
+# END_KITTY_THEME
+
+
+# BEGIN_KITTY_FONTS
+font_family      family="Maple Mono NF"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS

@@ -23,7 +23,6 @@ vim.g.gruvbox_contrast_dark = 'hard'
 vim.background = 'light'
 vim.cmd('colorscheme spellbook')
 
-MiniDeps.add("sigmasd/deno-nvim")
 MiniDeps.add("nvim-telescope/telescope.nvim")
 MiniDeps.add("nvim-lua/plenary.nvim")
 MiniDeps.add("kyazdani42/nvim-web-devicons")
@@ -39,7 +38,17 @@ MiniDeps.add('kelly-lin/ranger.nvim');
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
 MiniDeps.add('lukas-reineke/indent-blankline.nvim');
-MiniDeps.add("OXY2DEV/markview.nvim")
+MiniDeps.add("OXY2DEV/markview.nvim");
+MiniDeps.add("3rd/image.nvim");
+require("image").setup();
+MiniDeps.add("HakonHarnes/img-clip.nvim")
+require("img-clip").setup({
+	default = {
+		dir_path = ".assets",
+		relative_to_current_file = true
+	}
+});
+
 require('markview').setup({
 	markdown = {
 		enabled = true,
@@ -180,6 +189,9 @@ vim.api.nvim_set_keymap("n", "<leader><leader>", "", {
 		require("ranger-nvim").open(true)
 	end,
 })
+
+--- img-clip
+vim.keymap.set("n", "<S-g>p", "<cmd>PasteImage<cr>", {desc = "Paste image from system clipboard"})
 
 ---other
 vim.api.nvim_set_keymap("i", 'ù', '~', {noremap = true})
