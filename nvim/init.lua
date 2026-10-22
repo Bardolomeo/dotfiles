@@ -45,7 +45,8 @@ MiniDeps.add("HakonHarnes/img-clip.nvim")
 require("img-clip").setup({
 	default = {
 		dir_path = ".assets",
-		relative_to_current_file = true
+		relative_to_current_file = true,
+		process_cmd = "convert - -resize 50% -quality 65 -"
 	}
 });
 
