@@ -13,7 +13,7 @@ hl(0, 'Normal',  {fg = '#0d20b6', bg = '#E0c9a6', ctermfg = 145, ctermbg = 235})
 hl(0, 'Cursor', {bg = '#0b0b0b', fg='#ffffff'})
 hl(0, 'CursorLine', {bg = 'NONE', ctermbg = 236})
 hl(0, 'CursorLineNr', {bg='#AC3235', fg='#d4af37'})
-hl(0, 'Visual', {fg='#000000', bg='#AC3235', ctermbg = 000})
+hl(0, 'Visual', {fg='#e0c9a6', bg='#0d20b6', ctermbg = 000})
 hl(0, 'LineNr', {fg = '#1C6A35', ctermfg= 238})
 hl(0, 'NonText', {fg = '#85754e', ctermfg = 238})
 hl(0, 'SpecialKey', {link = 'NonText'})
@@ -40,6 +40,7 @@ hl(0, 'MatchParen', {fg = '#97572B', ctermfg = 39, underline = true})
 hl(0, 'Search', {fg = '#0d20b6', bg = '#e5c07b', ctermfg = 235, ctermbg = 180})
 hl(0, 'IncSearch', {fg = '#e5c07b', bg = '#5c6370', ctermfg = 180, ctermbg = 59})
 hl(0, 'DiagnosticError', {fg = '#AC3235', ctermfg = 204})
+hl(0, 'DiagnosticUnderlineError', {bg = '#AC3235', fg = '#e0c9a6', ctermfg = 204, undercurl = true})
 hl(0, 'DiagnosticHint', {fg = '#1C6A35', ctermfg = 38})
 hl(0, 'DiagnosticInfo', {fg = '#61afef', ctermfg = 39})
 hl(0, 'DiagnosticWarn', {fg = '#d4af37', ctermfg = 180})
@@ -96,22 +97,32 @@ hl(0, 'StorageClass', {fg = '#d4af37', ctermfg = 180})
 hl(0, 'String', {fg = '#1C6A35', ctermfg = 114})
 hl(0, 'Structure', {fg = '#d4af37', ctermfg = 180})
 hl(0, 'Todo', {fg = '#de5285', ctermfg = 170})
-hl(0, 'Type', {fg = '#d4af37', ctermfg = 180})
+hl(0, 'Type', {fg = '#1c6a35', ctermfg = 180})
 hl(0, 'Typedef', {fg = '#d4af37', ctermfg = 180})
 
 ---
 -- Built-in groups
 ---
 
+--- markdown
+hl(0, '@markup.strong', {fg = '#0b0b0b', bold=true})
+hl(0, '@markup.link', {fg = '#558dc8', underline= true})
+hl(0, '@markup.italic', {fg = '#ac3235', italic=true})
+
+
 -- Markview
 hl(0, 'MarkviewPalette1', {fg = '#1c6934', bg = '#b6b88f'})
 hl(0, 'MarkviewPalette2', {fg = '#AC3235', bg = '#c89697'})
 hl(0, 'MarkviewPalette3', {fg = '#0d20b6', bg = '#a3a6c8'})
 hl(0, 'MarkviewPalette4', {fg = '#de5285', bg = '#c8a3b1'})
-hl(0, '@markup.strong', {fg = '#0b0b0b', bold=true})
-hl(0, '@markup.link', {fg = '#558dc8', underline= true})
-hl(0, '@markup.italic', {fg = '#ac3235', italic=true})
 
+
+-- Markview
+hl(0, '@markup.heading.1.markdown', {fg = '#1c6934', bg = '#b6b88f'})
+hl(0, 'RenderMarkdownH1Bg', {fg = '#1c6934', bg = '#b6b88f'})
+hl(0, 'RenderMarkdownH2Bg', {fg = '#AC3235', bg = '#c89697'})
+hl(0, 'RenderMarkdownH3Bg', {fg = '#0d20b6', bg = '#a3a6c8'})
+hl(0, 'RenderMarkdownH4Bg', {fg = '#de5285', bg = '#c8a3b1'})
 -- Syntax: Netrw
 hl(0, 'netrwDir', {link = 'Function'})
 hl(0, 'netrwHelpCmd', {link = 'Special'})
@@ -138,6 +149,7 @@ hl(0, 'typescriptParens', {fg = 'fg'})
 hl(0, 'typescriptImport', {link = 'Keyword'})
 hl(0, 'typescriptTry', {link = 'Keyword'})
 hl(0, 'typescriptExceptions', {link = 'Keyword'})
+hl(0, 'tsxAttrib', {fg = '#ac3235'})
 
 -- Treesitter
 if vim.fn.has('nvim-0.8') == 1 then

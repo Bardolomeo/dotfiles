@@ -38,38 +38,42 @@ MiniDeps.add('kelly-lin/ranger.nvim');
 MiniDeps.add('mason-org/mason.nvim')
 MiniDeps.add('mason-org/mason-lspconfig.nvim');
 MiniDeps.add('lukas-reineke/indent-blankline.nvim');
-MiniDeps.add("OXY2DEV/markview.nvim");
+-- MiniDeps.add("OXY2DEV/markview.nvim");
+MiniDeps.add("MeanderingProgrammer/render-markdown.nvim");
 MiniDeps.add("3rd/image.nvim");
-require("image").setup();
+require('image').setup({
+	integrations = {
+		markdown = {
+			floating_windows = true,
+			only_render_image_at_cursor = true,
+		}
+	},
+});
 MiniDeps.add("HakonHarnes/img-clip.nvim")
 require("img-clip").setup({
 	default = {
 		dir_path = ".assets",
 		relative_to_current_file = true,
-		process_cmd = "convert - -resize 50% -quality 65 -"
+		process_cmd = "convert - -quality 75 -resize 50%"
 	}
 });
 
-require('markview').setup({
-	markdown = {
-		enabled = true,
-		tables = {
-			enable = true,
-			strict = true,
-			block_decorator = true,
-			use_virt_lines = true
-		}
-	}
-})
+--- require('markview').setup({
+--- 	markdown = {
+--- 		enabled = true,
+--- 		tables = {
+--- 			enable = true,
+--- 			strict = true,
+--- 			block_decorator = true,
+--- 			use_virt_lines = true
+--- 		}
+--- 	}
+--- })
 
 require('ibl').setup();
 
 require("mason").setup()
-require('mason-lspconfig').setup({
-	ensure_installed = {
-		"lua_ls",
-	},
-})
+require('mason-lspconfig').setup()
 
 --- vim.cmd("set runtimepath='/home/magigraph/repos/dotfiles/nvim','/home/magigraph/.config/nvim','/home/magiraph/.config/nvim/lua'")
 
